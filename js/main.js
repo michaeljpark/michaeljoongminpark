@@ -2,27 +2,12 @@
    Project content lives in js/projects.js. */
 
 const $ = id => document.getElementById(id);
-const root = document.documentElement;
 const stage = $('stage'), strip = $('strip'), track = $('track'), panel = $('panel'), inner = $('panelInner');
 const mq = matchMedia('(max-width: 760px)');
 const reduce = matchMedia('(prefers-reduced-motion: reduce)');
 const pad2 = n => String(n).padStart(2, '0');
 const DUR = 700;
 let cur = -1, cw = 0, offset = 0, busy = false;
-
-/* theme */
-function syncTheme() {
-  const dark = root.getAttribute('data-theme') === 'dark';
-  $('themeLabel').textContent = dark ? 'Light' : 'Dark';
-  $('theme').setAttribute('aria-pressed', String(dark));
-}
-$('theme').addEventListener('click', () => {
-  const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  root.setAttribute('data-theme', next);
-  try { localStorage.setItem('theme', next); } catch (e) {}
-  syncTheme();
-});
-syncTheme();
 
 /* cards */
 $('count').textContent = `(${pad2(PROJECTS.length)})`;
