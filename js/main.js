@@ -34,7 +34,7 @@ PROJECTS.forEach((p, i) => {
   b.innerHTML = `
     <div class="frame">
       ${p.art ? p.art : p.poster ? `<img src="${p.poster}" alt="" loading="lazy" onerror="this.remove()">` : ''}
-      ${p.video ? `<video muted loop playsinline preload="none" data-src="${p.video}"></video>` : ''}
+      ${p.video ? `<video muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback aria-hidden="true" tabindex="-1" data-src="${p.video}"></video>` : ''}
       <span class="tags">${p.category.split(/,\s*/).map(t => `<span class="tag">${t.charAt(0).toUpperCase() + t.slice(1)}</span>`).join('')}</span>
     </div>
     <div class="meta small">
@@ -104,21 +104,59 @@ function fill(i) {
   $('mYear').textContent = p.year;
   $('mPitch').textContent = p.pitch;
 }
-function play(w, on) {
+/* Card video. Nothing is fetched until the first hover or open. A mouse
+   hover previews the clip; leaving pauses it and fades back to the poster,
+   and the next hover resumes from the same frame. While the card is open the
+   clip keeps playing (or starts, if it was paused). Off screen or in a
+   hidden tab it pauses, and picks up again when it is back. */
+const hoverMQ = matchMedia('(hover: hover) and (pointer: fine)');
+const saveData = !!(navigator.connection && navigator.connection.saveData);
+const clips = [];
+
+function clipWants(c) {
+  if (document.hidden || !c.inView) return false;
+  return c.active || (c.hover && hoverMQ.matches && !saveData && !reduce.matches);
+}
+function syncClip(c) {
+  const v = c.v;
+  if (clipWants(c)) {
+    if (!v.getAttribute('src')) { v.preload = 'auto'; v.src = v.dataset.src; }
+    /* A pause() before this resolves rejects it with AbortError, which is expected. */
+    if (v.paused) v.play().catch(() => {});
+  } else {
+    c.w.classList.remove('is-playing');
+    if (!v.paused) v.pause();
+  }
+}
+works.forEach(w => {
   const v = w.querySelector('video');
   if (!v) return;
-  if (on) {
-    if (!v.src && v.dataset.src) v.src = v.dataset.src;
-    v.currentTime = 0;
-    v.play().catch(() => {});
-  } else v.pause();
+  const c = { w, v, hover: false, active: false, inView: true };
+  w._clip = c;
+  clips.push(c);
+  w.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') { c.hover = true; syncClip(c); } });
+  w.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') { c.hover = false; syncClip(c); } });
+  /* Show the video only once frames are actually moving, so a slow first load keeps the poster. */
+  v.addEventListener('playing', () => { if (clipWants(c)) w.classList.add('is-playing'); else v.pause(); });
+});
+if (clips.length) {
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => entries.forEach(e => {
+      const c = e.target._clip;
+      c.inView = e.isIntersecting;
+      syncClip(c);
+    }));
+    clips.forEach(c => io.observe(c.w));
+  }
+  document.addEventListener('visibilitychange', () => clips.forEach(syncClip));
 }
+
 function mark() {
   works.forEach((w, j) => {
     const on = j === cur;
     w.classList.toggle('is-active', on);
     w.setAttribute('aria-expanded', String(on));
-    play(w, on);
+    if (w._clip) { w._clip.active = on; syncClip(w._clip); }
   });
 }
 const frames = () => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
