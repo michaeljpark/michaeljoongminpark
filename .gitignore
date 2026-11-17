@@ -5,3 +5,7 @@ node_modules/
 !.vscode/extensions.json
 !.vscode/settings.json
 *.log
+
+# Master video exports dropped in the repo root. The site uses the
+# web encodes in assets/video/, so the masters stay out of git.
+/*.mp4
