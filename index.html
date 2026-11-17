@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F6F6F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141414" media="(prefers-color-scheme: dark)">
+<title>Michael Joongmin Park | Portfolio</title>
+<meta name="description" content="Michael Joongmin Park, product designer based in Toronto.">
+<script>
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('theme'); } catch (e) {}
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400&family=Hanken+Grotesk:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="bar grid small">
+  <a class="name" href="#">Michael J. Park</a>
+  <nav aria-label="Main">
+    <a href="#work" aria-current="page">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <a href="https://michaeljpark.github.io/portfolio2026/Joongmin_Park_Resume.pdf">Résumé</a>
+  </nav>
+  <button class="theme" id="theme" aria-label="Switch colour theme">
+    <span class="sw" aria-hidden="true"></span><span id="themeLabel">Dark</span>
+  </button>
+</header>
+
+<section class="hero grid">
+  <h1>Product designer defining strategy through data-driven research, and building products people actually use.</h1>
+  <div class="side small">
+    <p>Industrial Design, OCAD University, May 2026. Working across information systems, human-centred design, and human-AI experience.</p>
+    <p class="mid">Toronto, ON<br>Last updated 28.08.2026</p>
+  </div>
+</section>
+
+<div class="sec-head small" id="work">
+  <h2>Selected work<span id="count"></span></h2>
+  <a href="https://michaeljpark.github.io/portfolio2026/index.html">All work</a>
+</div>
+
+<section class="stage" id="stage" aria-label="Selected work">
+  <div class="strip" id="strip">
+    <div class="track" id="track"></div>
+  </div>
+
+  <section class="panel" id="panel" aria-live="polite" aria-hidden="true">
+    <div class="panel-clip">
+      <div class="panel-inner" id="panelInner">
+        <div class="p-top">
+          <span class="small mid" id="pIdx"></span>
+          <h3 class="p-title" id="pTitle"></h3>
+          <span class="m-steps">
+            <button id="mPrev" aria-label="Previous project"><svg viewBox="0 0 7 12" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M6 1L1 6l5 5"/></svg></button>
+            <button id="mNext" aria-label="Next project"><svg viewBox="0 0 7 12" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M1 1l5 5-5 5"/></svg></button>
+          </span>
+          <button class="p-close small" id="pClose">
+            Close
+            <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M1 1l8 8M9 1L1 9"/></svg>
+          </button>
+        </div>
+        <div class="row">
+          <span class="small mid">Problem definition</span>
+          <p class="p-text" id="pProblem"></p>
+        </div>
+        <div class="row">
+          <span class="small mid">KPI</span>
+          <dl class="kpi" id="pKpi"></dl>
+        </div>
+        <div class="row last">
+          <span class="small mid">TL;DR</span>
+          <p class="p-text" id="pTldr"></p>
+          <a class="cta small" id="pCta" href="#">
+            View case study
+            <svg viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M1.5 9.5l8-8M3 1.5h6.5V8"/></svg>
+          </a>
+        </div>
+        <div class="m-lead">
+          <a class="cta small" id="pCtaM" href="#">
+            View case study
+            <svg viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M1.5 9.5l8-8M3 1.5h6.5V8"/></svg>
+          </a>
+          <div class="m-meta small">
+            <b id="mTitle"></b><span class="mid" id="mYear"></span>
+            <span class="mid m-pitch" id="mPitch"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <button class="chev prev" id="prev" aria-label="Previous project">
+    <svg viewBox="0 0 14 24" fill="none" stroke="currentColor" stroke-width="1.25"><path d="M12 1L2 12l10 11"/></svg>
+  </button>
+  <button class="chev next" id="next" aria-label="Next project">
+    <svg viewBox="0 0 14 24" fill="none" stroke="currentColor" stroke-width="1.25"><path d="M2 1l10 11L2 23"/></svg>
+  </button>
+</section>
+
+<section class="block grid" id="about">
+  <span class="label small mid">Approach</span>
+  <h2 class="statement">I focus on function rather than how it looks.</h2>
+  <p class="body">I combine human-centred research, design thinking, and strategy to explore interaction and build working products. Form follows that work, and every design decision has to justify itself by what it does for the user. In practice that means structuring qualitative and quantitative research, setting clear KPIs, and turning findings into artifacts stakeholders can act on.</p>
+</section>
+
+<section class="block grid">
+  <span class="label small mid">Experience</span>
+  <ul class="list small">
+    <li><span class="c1">Junior Product Designer (internship)</span><span class="c2 mid">Swave Studios, Toronto</span><span class="c3 mid">Oct to Dec 2025</span></li>
+    <li><span class="c1">UX Researcher and Concept Designer (co-op)</span><span class="c2 mid">Cadillac Fairview, Toronto</span><span class="c3 mid">Sep to Dec 2024</span></li>
+    <li><span class="c1">Student Monitor, Production</span><span class="c2 mid">OCAD U Copy and Print, Toronto</span><span class="c3 mid">2023 to 2024</span></li>
+    <li><span class="c1">Presentation and Infographic Designer</span><span class="c2 mid">Ieumgil, Seoul</span><span class="c3 mid">2022 to 2023</span></li>
+    <li><span class="c1">Sergeant, Squad Leader</span><span class="c2 mid">ROK Army Military Police</span><span class="c3 mid">2021 to 2022</span></li>
+  </ul>
+</section>
+
+<section class="block grid">
+  <span class="label small mid">Practice</span>
+  <ul class="list small">
+    <li><span class="c1"><a href="https://cnpt.ca">CNPT</a></span><span class="c2 mid">Co-owner, design consultancy</span><span class="c3 mid">2026</span></li>
+    <li><span class="c1"><a href="https://instagram.com/mkpk.exp">MKPK</a></span><span class="c2 mid">Independent designer, digital commissions</span><span class="c3 mid">2026</span></li>
+  </ul>
+</section>
+
+<section class="block grid">
+  <span class="label small mid">Recognition</span>
+  <ul class="list small">
+    <li><span class="c1">OnGen Radio</span><span class="c2 mid">ACIDO, finalist</span><span class="c3 mid">May 2026</span></li>
+  </ul>
+</section>
+
+<section class="block grid">
+  <span class="label small mid">Toolkit</span>
+  <div class="tools small">
+    <div><span class="mid">Design and web</span><p>Figma, Framer, HTML, CSS, JavaScript, Python, SQL</p></div>
+    <div><span class="mid">Documentation</span><p>Photoshop, Premiere, Illustrator, PowerPoint, Excel</p></div>
+    <div><span class="mid">3D and prototyping</span><p>Fusion 360, KeyShot, Blender, SolidWorks</p></div>
+  </div>
+</section>
+
+<section class="block grid contact" id="contact">
+  <span class="label small mid">Contact</span>
+  <h2 class="statement"><a href="mailto:joongmin991114@gmail.com">joongmin991114@gmail.com</a></h2>
+  <div class="links small">
+    <a href="https://linkedin.com/in/michael-park-design">LinkedIn</a>
+    <a href="https://github.com/michaeljpark">GitHub</a>
+    <a href="https://michaeljpark.github.io/portfolio2026/Joongmin_Park_Resume.pdf">Résumé</a>
+  </div>
+</section>
+
+<footer class="foot grid small">
+  <span>© 2026 Michael Joongmin Park</span>
+  <span class="mid hide-m">Portfolio 2024 to 2026</span>
+  <span class="mid hide-m">Toronto, ON</span>
+  <span class="r"><a href="#">Back to top</a></span>
+</footer>
+
+<script src="js/projects.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
