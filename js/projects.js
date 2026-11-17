@@ -27,7 +27,7 @@ const PROJECTS = [
   {
     title: "Clink", pitch: "Dynamic workspace for small teams", year: "2026",
     category: "Full-stack web app, incubating",
-    video: "", poster: "assets/images/clink.webp",
+    video: "assets/video/clink.mp4", poster: "assets/images/clink.webp",
     problem: "A small team's context is scattered across its tools, and information that can't be reached when it's needed is effectively lost.",
     kpi: [{ v: "3", l: "Team members" }, { v: "4", l: "Roles, from UX to full-stack" }, { v: "1", l: "Shared canvas for the team" }],
     tldr: "An infinite canvas of typed blocks, comment threads, and document review that keeps a small team's reasoning next to its work.",
