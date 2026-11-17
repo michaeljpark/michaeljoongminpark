@@ -38,7 +38,7 @@ const PROJECTS = [
     category: "Thesis project, AR app",
     video: "", poster: "assets/images/ongen-radio.webp",
     problem: "AR glasses exist, but their interaction still extends the smartphone, which leaves the space around the user inert.",
-    kpi: [{ v: "147", l: "Pilot users across 408 sessions" }, { v: "35.6s", l: "Median interaction time" }, { v: "73", l: "SUS score, pilot 1" }],
+    kpi: [{ v: "147", l: "Field pilot users, 408 sessions" }, { v: "35.6s", l: "Median interaction time" }, { v: "73", l: "SUS score, Pilot 1 (n=17)" }],
     tldr: "A real-time geolocational AR platform that maps social media and local information onto real buildings, turning the surrounding space into both content and context.",
     href: BASE + "ongenradio.html"
   },
@@ -47,7 +47,7 @@ const PROJECTS = [
     category: "Service design, team lead",
     video: "", poster: "assets/images/tokentrust.webp",
     problem: "People have no way to see what their data is worth, where it goes, or who profits from it, and no law requires that its value be returned to them.",
-    kpi: [{ v: "3", l: "AI services audited" }, { v: "6", l: "Audit axes, from energy to labour" }, { v: "5", l: "Person team, led end to end" }],
+    kpi: [{ v: "81%", l: "Saw a pricing problem in AI (n=28)" }, { v: "86%", l: "Idea acceptance, ICE scoring" }, { v: "6", l: "Audit axes across 3 AI services" }],
     tldr: "A governance platform that scores the quality of user-contributed AI data, pays users tokens for it, and lets that value move across platforms.",
     href: BASE + "tokentrust.html"
   },
@@ -56,7 +56,7 @@ const PROJECTS = [
     category: "Client project, Cadillac Fairview",
     video: "", poster: "", art: SHERWAY_ART,
     problem: "Sherway Gardens works for shopping but not for visiting. Its car-first layout gives people no reason to come without a purchase in mind.",
-    kpi: [{ v: "7", l: "On-site interviews" }, { v: "13", l: "Mentions of belonging" }, { v: "6", l: "Languages in story playback" }],
+    kpi: [{ v: "7", l: "On-site interviews" }, { v: "13", l: "Mentions of cultural welcome" }, { v: "10", l: "Mentions of shopping in person" }],
     tldr: "Sherway Stamp, a poster-triggered audio story system where visitors collect stamps across the mall, events, and retail, giving them a reason to return.",
     href: BASE + "cf-sherway.html"
   }
