@@ -229,6 +229,42 @@ strip.addEventListener('scroll', () => {
   strip.scrollLeft = 0;
   if (cur < 0) setOffset(Math.min(maxOffset(), Math.max(0, offset + s)), false);
 });
+/* Two-finger horizontal swipe on a trackpad (also a tilt wheel or shift+wheel):
+   one gesture is one step, exactly like the chevrons, so an open panel moves to
+   the next project and a closed strip moves by one card. A trackpad keeps firing
+   momentum events after the fingers lift, so after a step the gesture stays
+   locked until the events go quiet. Momentum only ever decays in the same
+   direction, so a reversal, or deltas that start climbing again out of the
+   tail, is a new swipe and is let through. Vertical scrolling is left to the page. */
+let wAcc = 0, wLock = false, wAt = 0, wDir = 0, wLow = 0, wPrev = 0, wRise = 0, wQuiet = 0;
+stage.addEventListener('wheel', e => {
+  if (mq.matches) return;
+  let dx = e.deltaX;
+  if (!dx && e.shiftKey) dx = e.deltaY;
+  else if (Math.abs(dx) <= Math.abs(e.deltaY)) return;
+  e.preventDefault();
+  const px = dx * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? strip.clientWidth : 1);
+  const a = Math.abs(px), dir = Math.sign(px), now = performance.now();
+  clearTimeout(wQuiet);
+  wQuiet = setTimeout(() => { wLock = false; wAcc = 0; }, 180);
+  if (wLock) {
+    const since = now - wAt;
+    wRise = a > wPrev ? wRise + 1 : 0;
+    wPrev = a;
+    wLow = Math.min(wLow, a);
+    const reversed = dir !== wDir && a >= 4 && since > 150;
+    const fresh = since > 300 && wRise >= 3 && a >= Math.max(8, wLow * 2);
+    if (!reversed && !fresh) return;
+    wLock = false; wAcc = 0;
+  }
+  if (wAcc && dir !== Math.sign(wAcc)) wAcc = 0;
+  wAcc += px;
+  if (Math.abs(wAcc) >= 50) {
+    step(wAcc > 0 ? 1 : -1);
+    wLock = true; wAt = now; wDir = Math.sign(wAcc); wLow = wPrev = a; wRise = 0; wAcc = 0;
+  }
+}, { passive: false });
+
 let sx = null;
 strip.addEventListener('touchstart', e => { sx = mq.matches ? null : e.touches[0].clientX; }, { passive: true });
 strip.addEventListener('touchend', e => {
